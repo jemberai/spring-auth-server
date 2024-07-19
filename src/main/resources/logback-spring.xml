@@ -1,0 +1,27 @@
+<configuration>
+
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+
+    <springProfile name="default">
+        <include resource="org/springframework/boot/logging/logback/base.xml" />
+    </springProfile>
+
+    <springProfile name="json-logs">
+        <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+        </appender>
+        <format>
+            <label>
+                <pattern>app=${appName},host=${HOSTNAME},traceID=%X{traceId:-NONE},level=%level</pattern>
+            </label>
+            <message>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </message>
+            <sortByTime>true</sortByTime>
+        </format>
+        <root level="INFO">
+            <appender-ref ref="jsonConsoleAppender" />
+        </root>
+    </springProfile>
+
+</configuration>

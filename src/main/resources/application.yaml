@@ -1,0 +1,69 @@
+spring:
+  application:
+    name: spring-auth-server
+  profiles:
+    active: json-logs
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          jember-client:
+            registration:
+              client-id: "jember-client"
+              client-secret: "${{JEMBER_SECRET}:{noop}jember-secret}"
+              client-authentication-methods:
+                - "client_secret_basic"
+                - "client_secret_post"
+              authorization-grant-types:
+              - "client_credentials"
+              - "authorization_code"
+              - "refresh_token"
+              scopes:
+              - "read"
+              - "write"
+              redirect-uris:
+                - "http://${GATEWAY_SERVER:127.0.0.1}:${GATEWAY_SERVER_PORT:8080}/login/oauth2/code/messaging-client-oidc"
+                - "http://${GATEWAY_SERVER:127.0.0.1}:${GATEWAY_SERVER_PORT:8080}/authorized"
+              post-logout-redirect-uris:
+                  - "http://${GATEWAY_SERVER:127.0.0.1}:${GATEWAY_SERVER_PORT:8080}/logged-out"
+            require-authorization-consent: true
+          jember2-client:
+            registration:
+              client-id: "jember2-client"
+              client-secret: "${{JEMBER2_SECRET}:{noop}jember2-secret}"
+              client-authentication-methods:
+                - "client_secret_basic"
+                - "client_secret_post"
+              authorization-grant-types:
+                - "client_credentials"
+                - "authorization_code"
+                - "refresh_token"
+              scopes:
+                - "read"
+                - "write"
+              redirect-uris:
+                - "http://${GATEWAY_SERVER:127.0.0.1}:${GATEWAY_SERVER_PORT:8080}/login/oauth2/code/messaging-client-oidc"
+                - "http://${GATEWAY_SERVER:127.0.0.1}:${GATEWAY_SERVER_PORT:8080}/authorized"
+              post-logout-redirect-uris:
+                - "http://${GATEWAY_SERVER:127.0.0.1}:${GATEWAY_SERVER_PORT:8080}/logged-out"
+            require-authorization-consent: true
+server:
+  port: 9000
+logging:
+  pattern:
+    level: |
+      [${spring.application.name:},%X{traceId:-},%X{spanId:-}]
+  level:
+    org.zalando.logbook: trace
+    root: ${LOG_LEVEL:info}
+    # org.springframework.web: trace
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true

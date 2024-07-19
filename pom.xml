@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>org.jemberai</groupId>
+    <artifactId>spring-auth-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>spring-auth-server</name>
+    <description>spring-auth-server</description>
+    <inceptionYear>2024</inceptionYear>
+
+    <organization>
+        <name>jember.ai</name>
+        <url>https://jember.ai</url>
+    </organization>
+
+    <scm>
+        <url>https://github.com/jemberai/spring-auth-server</url>
+        <connection>git@github.com:jemberai/spring-auth-server.git</connection>
+        <developerConnection>git@github.com:jemberai/spring-auth-server.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>Github Issues</system>
+        <url>https://github.com/jemberai/spring-auth-server/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>GitHub Actions</system>
+        <url>https://github.com/jemberai/spring-auth-server/actions/new</url>
+    </ciManagement>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <java.version>21</java.version>
+        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
+        <logbook.version>3.9.0</logbook.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>logbook-spring-boot-starter</artifactId>
+            <version>${logbook.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <developers>
+        <developer>
+            <id>springframeworkguru</id>
+            <name>John Thompson</name>
+            <email>john at jember.ia</email>
+            <organization>jember.ai</organization>
+            <organizationUrl>https://jember.ai</organizationUrl>
+            <roles>
+                <role>lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>bhalle</id>
+            <name>Britton Halle</name>
+            <email>britton at jember.ia</email>
+            <organization>jember.ai</organization>
+            <organizationUrl>https://jember.ai</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+</project>
